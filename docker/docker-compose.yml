@@ -1,8 +1,8 @@
 
 
 services:
-  quoteGen:
-    container_name: quoteGen
+  quote_gen:
+    container_name: quote_gen
     build:
       context: .
       dockerfile: docker/Dockerfile
