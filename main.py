@@ -19,8 +19,6 @@ bot: telebot.TeleBot = telebot.TeleBot(settings.TELEGRAM_TOKEN)
 
 @bot.message_handler(func=lambda message: True)
 def handle_all_messages(message: telebot.types.Message):
-    
-    logging.info(f"Received message: {message}")
 
     if message.forward_from or message.forward_from_chat:
         # avatar = get_user_avatar(message.forward_from.username, message.forward_from.id, bot)

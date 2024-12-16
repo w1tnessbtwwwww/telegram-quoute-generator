@@ -84,6 +84,7 @@ def generate_image(quote_text: str, author_name: str) -> Result[None]:
 def generate_quote(quote: QuoteModel) -> Result[None]:
     try:
         generate_image(quote.wrapped_quote, quote.author)
+        logger.info(f"Создана цитата: Автор {quote.author}, Текст: {quote.wrapped_quote}")
         return success(None)
     except Exception as e:
         print(e)
