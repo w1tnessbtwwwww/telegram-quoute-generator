@@ -4,7 +4,6 @@ import telebot
 from telebot.types import Message
 from telebot.types import UserProfilePhotos
 
-import logging
 
 from app.quote_module.models.quote_model import QuoteModel
 from app.utils.get_user_avatar import get_user_avatar
