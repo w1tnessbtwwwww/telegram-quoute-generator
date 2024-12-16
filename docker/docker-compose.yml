@@ -1,0 +1,10 @@
+
+
+services:
+  quoteGen:
+    container_name: quoteGen
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    restart: always
+    command: ["poetry", "run", "python", "main.py"]
