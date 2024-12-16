@@ -2,4 +2,4 @@ dev:
 	poetry run python main.py
 
 deploy:
-	docker-compose -f docker/docker-compose.yml up --build -d
+	docker-compose -f docker/docker-compose.yml --project-directory . up --build -d
