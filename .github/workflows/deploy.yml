@@ -19,7 +19,7 @@ jobs:
 
       - name: Copy .env file
         run: |
-          echo "${{ secrets.ENV_FILE }}" > .env
+          echo "${{ secrets.QUOTE_ENV }}" > .env
 
       - name: Run docker-compose.yml
         run: |
