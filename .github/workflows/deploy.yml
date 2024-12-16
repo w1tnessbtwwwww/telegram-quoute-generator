@@ -1,0 +1,24 @@
+name: Deployment
+
+on:
+  push:
+    branches:
+      - develop
+      - master
+  pull_request:
+    branches:
+      - master
+      
+
+jobs:
+  Deploy:
+    runs-on: self-hosted
+    steps:
+      - name: Downloading repository
+        uses: actions/checkout@v4
+
+      - name: Copy .env file
+        run: |
+          echo "${{ secrets.ENV_FILE }}" > .env
+
+          
