@@ -1,6 +1,6 @@
 from app.quote_module.models.quote_model import QuoteModel
-from app.utils.result.result import Result
-
+from app.utils.result.result import Result, err, success
+from app.utils.logger.logger import logger
 from PIL import Image, ImageDraw, ImageFont
 import textwrap
 
@@ -75,9 +75,16 @@ def generate_image(quote_text: str, author_name: str) -> Result[None]:
     add_text(image, author_text, author_font, author_position)
 
     avatar = create_avatar_circle(avatar_size)
-    avatar_position = (padding, height - avatar_size - padding)
-    paste_avatar(image, avatar, avatar_position)
+    avatar_position = (50, height - avatar_size - 50)
+    # paste_avatar(image, f"{author_name}_avatar.png", avatar_position)
+
 
     image.save(f'temp_quotes/{author_name.replace("@", "")}.png')
+    image.close()
 def generate_quote(quote: QuoteModel) -> Result[None]:
-    generate_image(quote.wrapped_quote, quote.author)
+    try:
+        generate_image(quote.wrapped_quote, quote.author)
+        return success(None)
+    except Exception as e:
+        print(e)
+        return err("Не удалось создать цитату. Информация уже направлена разработчикам.")
