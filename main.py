@@ -1,3 +1,5 @@
+import asyncio
+import os
 import telebot
 from telebot.types import Message
 from telebot.types import UserProfilePhotos
@@ -17,12 +19,17 @@ bot: telebot.TeleBot = telebot.TeleBot(settings.TELEGRAM_TOKEN)
 
 @bot.message_handler(func=lambda message: True)
 def handle_all_messages(message: telebot.types.Message):
+    
     logging.info(f"Received message: {message}")
 
     if message.forward_from or message.forward_from_chat:
-        avatar = get_user_avatar(message.forward_from.id, bot)
-        image = generate_quote(QuoteModel(message.forward_from.username, message.any_text))
-        bot.reply_to(message, image.success)
+        # avatar = get_user_avatar(message.forward_from.username, message.forward_from.id, bot)
+        image = generate_quote(QuoteModel(message.any_text, message.forward_from.username))
+        if image.success:
+            with open(f"temp_quotes/{message.forward_from.username}.png", "rb") as photo:
+                bot.send_photo(message.chat.id, photo)
+            
+            os.remove(f"temp_quotes/{message.forward_from.username}.png")
                
 if __name__ == "__main__":
 

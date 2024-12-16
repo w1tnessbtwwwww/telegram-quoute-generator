@@ -3,7 +3,7 @@ import requests
 
 from app.cfg.settings import settings
 
-def get_user_avatar(user_id: int, client: telebot) -> bool:
+def get_user_avatar(name: str, user_id: int, client: telebot) -> bool:
     media: telebot.types.UserProfilePhotos = client.get_user_profile_photos(user_id)
     if media.total_count > 0:
         # Получаем последнюю фотографию профиля
@@ -20,7 +20,7 @@ def get_user_avatar(user_id: int, client: telebot) -> bool:
 
         if response.status_code == 200:
             # Сохраняем файл на диск
-            with open('avatar.jpg', 'wb') as f:
+            with open(f'{name}_avatar.jpg', 'wb') as f:
                 f.write(response.content)
                 return True
             

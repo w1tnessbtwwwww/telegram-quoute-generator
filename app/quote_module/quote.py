@@ -76,16 +76,15 @@ def generate_image(quote_text: str, author_name: str) -> Result[None]:
 
     avatar = create_avatar_circle(avatar_size)
     avatar_position = (50, height - avatar_size - 50)
-    # paste_avatar(image, f"{author_name}.png", avatar_position)
-    image.save(f'{author_name}.png')
-    image.show()
+    # paste_avatar(image, f"{author_name}_avatar.png", avatar_position)
 
 
     image.save(f'temp_quotes/{author_name.replace("@", "")}.png')
+    image.close()
 def generate_quote(quote: QuoteModel) -> Result[None]:
     try:
-        generate_image(quote.quote_text, quote.author_text)
-        return success()
+        generate_image(quote.wrapped_quote, quote.author)
+        return success(None)
     except Exception as e:
-        logger.error(e)
+        print(e)
         return err("Не удалось создать цитату. Информация уже направлена разработчикам.")
