@@ -5,6 +5,6 @@ services:
     container_name: quote_gen
     build:
       context: .
-      dockerfile: docker/Dockerfile
+      dockerfile: Dockerfile
     restart: always
     command: ["poetry", "run", "python", "main.py"]
