@@ -21,4 +21,8 @@ jobs:
         run: |
           echo "${{ secrets.ENV_FILE }}" > .env
 
-          
+      - name: Run docker-compose.yml
+        run: |
+          make deploy
+
+
