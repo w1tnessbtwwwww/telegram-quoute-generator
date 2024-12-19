@@ -4,9 +4,10 @@ from typing import Optional
 
 
 class QuoteModel:
-    def __init__(self, quote: str, author: str):
+    def __init__(self, quote: str, author: str, avatar:str):
         self.quote = quote
         self.author = author
+        self.avatar = avatar
 
     @property
     def wrapped_quote(self, chunk_size=50):

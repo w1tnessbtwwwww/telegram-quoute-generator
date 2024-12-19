@@ -35,7 +35,7 @@ def create_avatar_circle(size, border_color='black', border_width=2):
 def paste_avatar(image, avatar, position):
     image.paste(avatar, position, avatar)
 
-def generate_image(quote_text: str, author_name: str) -> Result[None]:
+def generate_image(quote_text: str, author_name: str, avatar:str) -> Result[None]:
     title_font = ImageFont.truetype("app/quote_module/media/Roboto-Medium.ttf", 24)
     quote_font = ImageFont.truetype("app/quote_module/media/Roboto-Medium.ttf", 20)
     author_font = ImageFont.truetype("app/quote_module/media/Roboto-Medium.ttf", 16)
@@ -72,17 +72,17 @@ def generate_image(quote_text: str, author_name: str) -> Result[None]:
 
     author_position = (padding + avatar_size + padding, height - author_height - padding)
     add_text(image, author_text, author_font, author_position)
-
+    
     avatar = create_avatar_circle(avatar_size)
     avatar_position = (50, height - avatar_size - 50)
-    # paste_avatar(image, f"{author_name}_avatar.png", avatar_position)
+    paste_avatar(image, f"{author_name}_avatar.png", avatar_position)
 
 
     image.save(f'temp_quotes/{author_name.replace("@", "")}.png')
     image.close()
 def generate_quote(quote: QuoteModel) -> Result[None]:
     try:
-        generate_image(quote.wrapped_quote, quote.author)
+        generate_image(quote.wrapped_quote, quote.author, quote.avatar)
         return success(None)
     except Exception as e:
         print(e)
