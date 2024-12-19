@@ -4,4 +4,7 @@
 
 .DS_Store
 
-temp_quotes/
+
+
+
+*.log

@@ -12,6 +12,7 @@ telebot = "^0.0.5"
 pydantic = "^2.10.3"
 pillow = "^11.0.0"
 pytelegrambotapi = "^4.25.0"
+pydantic-settings = "^2.7.0"
 
 
 [build-system]
